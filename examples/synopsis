@@ -1,0 +1,34 @@
+use Cro::HTTP::Router;
+use Cro::HTTP::Server;
+use AWS::SNS::Notification;
+
+
+my $app = route {
+    post -> 'sns-message' {
+        # The SNS message has a content-type of 'text/plain' so this will be raw JSON
+        request-body -> $json {
+            my $notification = AWS::SNS::Notification.from-json($json);
+            # Check this is a valid notification
+            if $notification.verify-signature {
+               if $notification.is-notification {
+                   # Do something with the $notification.message
+                   # The format of which depends on the source - an S3 notification will be a JSON String for instance
+               }
+               else {
+                   # This is subscribe or unsubscribe confirmation request
+                   # so perform the confirmation
+                   $notification.respond;
+               }
+            }
+            else {
+                bad-request 'text/plain', 'Fake notification';
+            }
+        }
+    }
+};
+
+my Cro::Service $service = Cro::HTTP::Server.new(:host<127.0.0.1>, :port<7798>, application => $app);
+
+$service.start;
+
+react  { whenever signal(SIGINT) { $service.stop; exit; } }

@@ -1,0 +1,103 @@
+{
+  "children": [
+    {
+      "name": "META6.json",
+      "type": "file"
+    },
+    {
+      "name": "Changes",
+      "type": "file"
+    },
+    {
+      "type": "directory",
+      "purpose": null,
+      "name": "examples",
+      "children": [
+        {
+          "type": "file",
+          "name": "synopsis"
+        }
+      ]
+    },
+    {
+      "name": "LICENCE",
+      "type": "file"
+    },
+    {
+      "name": "t",
+      "purpose": null,
+      "type": "directory",
+      "children": [
+        {
+          "name": "025-validate-url.t",
+          "type": "file"
+        },
+        {
+          "name": "040-respond.t",
+          "type": "file"
+        },
+        {
+          "name": "020-simple.t",
+          "type": "file"
+        },
+        {
+          "type": "file",
+          "name": "030-verify.t"
+        },
+        {
+          "name": "data",
+          "children": [
+            {
+              "name": "SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem",
+              "type": "file"
+            },
+            {
+              "name": "not.json",
+              "type": "file"
+            },
+            {
+              "type": "file",
+              "name": "sconf.json"
+            }
+          ],
+          "purpose": null,
+          "type": "directory"
+        },
+        {
+          "type": "file",
+          "name": "001-meta.t"
+        }
+      ]
+    },
+    {
+      "name": "lib",
+      "children": [
+        {
+          "name": "AWS",
+          "children": [
+            {
+              "type": "directory",
+              "purpose": null,
+              "name": "SNS",
+              "children": [
+                {
+                  "type": "file",
+                  "name": "Notification.rakumod"
+                }
+              ]
+            }
+          ],
+          "type": "directory",
+          "purpose": null
+        }
+      ],
+      "purpose": null,
+      "type": "directory"
+    },
+    {
+      "name": "README.md",
+      "type": "file"
+    }
+  ],
+  "type": "layout"
+}

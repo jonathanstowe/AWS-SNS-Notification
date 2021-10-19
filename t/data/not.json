@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "67b0dbd8-c338-5425-a085-826147b866f8",
+  "TopicArn" : "arn:aws:sns:us-east-1:155944137683:jns-sns-s3-test",
+  "Subject" : "Amazon S3 Notification",
+  "Message" : "{\"Records\":[{\"eventVersion\":\"2.1\",\"eventSource\":\"aws:s3\",\"awsRegion\":\"us-east-1\",\"eventTime\":\"2021-09-13T16:54:14.889Z\",\"eventName\":\"ObjectCreated:Put\",\"userIdentity\":{\"principalId\":\"A2GQPBOKCEECX0\"},\"requestParameters\":{\"sourceIPAddress\":\"195.157.190.48\"},\"responseElements\":{\"x-amz-request-id\":\"VSAZSFQSCG1SN0GS\",\"x-amz-id-2\":\"0h1+M4JWfUkmZJOw6huK2EAQOn7ukIBlHG/rwnJXMnPmNNJoRUMiDHI8eO8HpJmABBpu/9sPC65SuI2g+8+oDceysp1YQBSmI3jkL/XDIqw=\"},\"s3\":{\"s3SchemaVersion\":\"1.0\",\"configurationId\":\"goooos\",\"bucket\":{\"name\":\"jns-test-1\",\"ownerIdentity\":{\"principalId\":\"A2GQPBOKCEECX0\"},\"arn\":\"arn:aws:s3:::jns-test-1\"},\"object\":{\"key\":\"FXT-6993.csv\",\"size\":2525,\"eTag\":\"c026e3b804ede1d01836baa30ccbaf2a\",\"sequencer\":\"00613F823ED87A8154\"}}}]}",
+  "Timestamp" : "2021-09-13T16:54:24.315Z",
+  "SignatureVersion" : "1",
+  "Signature" : "eA8rsXZXX+G9RdPcpsStONuYg6uMY5OUMpdc2+v11YaJ3/2oVEvcPqpKZpXlJGgFPtJjnGJP5MNkjz2j+8Q67CIsdeLiVBamvAK3caWt6icsUCtqEodMIdFoBP1cSIbhcCLqBZ4fM6gwnk5zuoJ7qctzjBHBnO3yioG3bhZeZTOS2TbUkQCb81jDWIE8DxQdMFVEkVxnOkm6AAy370GPVwddl9sI7Evr9Y4NHPvgLOBEXSB017qEoEAYpwNXu89CFRU9NzRHCpkiBIfpdaMbz9n7aCknlkUNLIXecvpvdD3xs4LypHqXtvSvsoiqwa44kXRxQ2IimJUs+vq/dlNVXg==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:155944137683:jns-sns-s3-test:7b894cdd-9da9-4f79-9520-629d521a99a6"
+}

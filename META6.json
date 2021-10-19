@@ -1,0 +1,40 @@
+{
+  "name": "AWS::SNS::Notification",
+  "version": "0.0.1",
+  "auth": "github:jonathanstowe",
+  "api": "0.1",
+  "description": "Description of an AWS Simple Notification Service message",
+  "authors": [
+    "Jonathan Stowe <jns+gh@gellyfish.co.uk>"
+  ],
+  "license": "Artistic-2.0",
+  "provides": {
+     "AWS::SNS::Notification" : "lib/AWS/SNS/Notification.rakumod"
+  },
+  "raku": "6.d",
+  "meta-version": "2",
+  "tags": [
+     "aws",
+     "sns",
+     "notification"
+  ],
+  "depends": [
+     "Cro::HTTP::Client",
+     "OpenSSL",
+     "Base64",
+     "URI"
+  ],
+  "resources": [
+  ],
+  "test-depends": [
+     "JSON::Fast",
+     "Test::Mock"
+  ],
+  "build-depends": [
+  ],
+  "support": {
+    "source": "https://github.com/jonathanstowe/AWS-SNS-Notification.git",
+    "email": "jns+gh@gellyfish.co.uk"
+  },
+  "source-url": "https://github.com/jonathanstowe/AWS-SNS-Notification.git"
+}
