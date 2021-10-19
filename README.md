@@ -2,6 +2,8 @@
 
 Description of an AWS Simple Notification Service message.
 
+[![CI](https://github.com/jonathanstowe/AWS-SNS-Notification/actions/workflows/main.yml/badge.svg)](https://github.com/jonathanstowe/AWS-SNS-Notification/actions/workflows/main.yml)
+
 ## Synopsis
 
 ```raku
