@@ -167,7 +167,7 @@ class AWS::SNS::Notification does JSON::Class {
     has Blob $.decoded-signature;
 
     method decoded-signature( --> Blob ) {
-        $!decoded-signature //= Blob(decode-base64(self.signature));
+        $!decoded-signature //= decode-base64(self.signature, :bin);
     }
 
     has OpenSSL::RSAKey $.rsa;
