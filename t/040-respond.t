@@ -23,7 +23,7 @@ my @tests = (
         my $ua = mocked(Cro::HTTP::Client, returning => {
             get-body    => Promise.kept('OK')
         });
-        my %args = from-json($*PROGRAM.parent.add('data', 'sconf.json').slurp);
+        my %args = from-json($*PROGRAM.parent.add('data/sconf.json').slurp);
         my $obj = AWS::SNS::Notification.new(%args, :$ua);
         my $subscribe-url = URI.new($obj.subscribe-url);
         my %q = $subscribe-url.query.Hash;
@@ -36,7 +36,7 @@ my @tests = (
         my $ua = mocked(Cro::HTTP::Client, returning => {
             get-body    => Promise.kept
         });
-        my %args = from-json($*PROGRAM.parent.add('data', 'not.json').slurp);
+        my %args = from-json($*PROGRAM.parent.add('data/not.json').slurp);
         my $obj = AWS::SNS::Notification.new(%args, :$ua);
         lives-ok { $obj.respond }, "respond";
         check-mock($ua, *.called('get-body', times => 0 ));

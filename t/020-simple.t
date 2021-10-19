@@ -28,7 +28,7 @@ sub check-attributes($obj, $args ) {
 
 for @tests -> $test {
     subtest {
-        my $json = $*PROGRAM.parent.add("data", $test<data>).slurp;
+        my $json = $*PROGRAM.parent.add("data/$test<data>").slurp;
         my $args = from-json($json);
         my $obj;
         lives-ok { $obj = AWS::SNS::Notification.from-json($json) }, "create object from json";
