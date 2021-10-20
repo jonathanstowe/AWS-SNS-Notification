@@ -158,7 +158,7 @@ class AWS::SNS::Notification does JSON::Class {
     has Str $.signing-certificate;
 
     method signing-certificate( --> Str ) {
-        $!signing-certificate //= await self.get-body($.signing-cert-url);
+        $!signing-certificate //= (await self.get-body($.signing-cert-url)).decode;
     }
 
     method signing-fields() {

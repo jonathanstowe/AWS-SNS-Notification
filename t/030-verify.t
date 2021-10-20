@@ -9,7 +9,7 @@ use Cro::HTTP::Client;
 my Str $signing-certificate = $*PROGRAM.parent.add('data/SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem').slurp;
 
 my $ua = mocked(Cro::HTTP::Client, returning => {
-    get-body    => Promise.kept($signing-certificate)
+    get-body    => Promise.kept($signing-certificate.encode)
 });
 my @tests = (
     {
