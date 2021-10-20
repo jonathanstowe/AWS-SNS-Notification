@@ -68,17 +68,21 @@ class AWS::SNS::Notification does JSON::Class {
     use OpenSSL::RSATools;
     use Cro::HTTP::Client;
 
-    has Str $.token             is json-name('Token');
-    has Str $.message-id        is json-name('MessageId');
-    has Str $.timestamp         is json-name('Timestamp');
-    has Str $.signature         is json-name('Signature');
-    has Str $.signature-version is json-name('SignatureVersion');
-    has Str $.subject           is json-name('Subject');
-    has Str $.topic-arn         is json-name('TopicArn');
-    has Str $.type              is json-name('Type');
-    has Str $.signing-cert-url  is json-name('SigningCertURL');
-    has Str $.subscribe-url     is json-name('SubscribeURL');
-    has Str $.message           is json-name('Message');
+    has Str $.token                     is json-name('Token');
+    has Str $.message-id                is json-name('MessageId');
+    has Str $.timestamp                 is json-name('Timestamp');
+    has Str $.signature                 is json-name('Signature');
+    has Str $.signature-version         is json-name('SignatureVersion');
+    has Str $.subject                   is json-name('Subject');
+    has Str $.topic-arn                 is json-name('TopicArn');
+    has Str $.type                      is json-name('Type');
+    # For some reason best known to Amazon, these differ between being delivered by HTTPS
+    # and delivered to a Lambda, so allow for either variation
+    has Str $.signing-cert-url          is json-name('SigningCertURL');
+    has Str $.lambda-signing-cert-url   is json-name('SigningCertUrl');
+    has Str $.subscribe-url             is json-name('SubscribeURL');
+    has Str $.lambda-subscribe-url      is json-name('SubscribeUrl');
+    has Str $.message                   is json-name('Message');
 
     #| A constructor that accepts an Associate positional argument which should be
     #| the decoded JSON of the message. Other named arguments can be provided.
@@ -124,6 +128,11 @@ class AWS::SNS::Notification does JSON::Class {
         self.^attributes.grep(JSON::Name::NamedAttribute).map( -> $a { $a.json-name => $a.name.substr(2)}).Hash;
     }
 
+    # Return the first of SubscribeURL or SubscribeUrl
+    method subscribe-url( --> Str ) {
+        $!subscribe-url // $!lambda-subscribe-url
+    }
+
     #| For a 'subscribe' or 'unsubscribe' message this should be called to confirm the action
     #| It will return a Promise that will be kept when the action is completed.
     method respond( --> Promise ) {
@@ -136,6 +145,12 @@ class AWS::SNS::Notification does JSON::Class {
         else {
             Promise.kept;
         }
+    }
+
+    # Return the first of SigningCertURL or SigningCertUrl
+    # This to deal with the difference between HTTPS and Lambda delivery
+    method signing-cert-url( --> Str ) {
+        $!signing-cert-url // $!lambda-signing-cert-url
     }
 
     #| This is the text of the signing certificate, it will typically be retrieved from the URL provided

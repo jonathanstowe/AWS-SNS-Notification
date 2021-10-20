@@ -1,6 +1,6 @@
 {
   "name": "AWS::SNS::Notification",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "auth": "github:jonathanstowe",
   "api": "0.1",
   "description": "Description of an AWS Simple Notification Service message",

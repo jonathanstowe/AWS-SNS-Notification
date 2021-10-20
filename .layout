@@ -16,6 +16,10 @@
         {
           "type": "file",
           "name": "synopsis"
+        },
+        {
+          "type": "file",
+          "name": "body-parser"
         }
       ]
     },

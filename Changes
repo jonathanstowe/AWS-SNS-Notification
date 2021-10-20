@@ -1,2 +1,4 @@
+v0.0.2		Wed 20 Oct 11:52:02 BST 2021
+	* Handle differences between the HTTPS and Lambda (proxy,) delivery
 v0.0.1		Tue 19 Oct 16:17:24 BST 2021
 	* Initial release

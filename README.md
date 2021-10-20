@@ -44,6 +44,52 @@ react  { whenever signal(SIGINT) { $service.stop; exit; } }
 
 ```
 
+Alternatively you can derive a body parser using [Cro::HTTP::BodyParser::JSONClass](https://github.com/jonathanstowe/Cro-HTTP-BodyParser-JSONClass) :
+
+```raku
+use Cro::HTTP::Router;
+use Cro::HTTP::Server;
+use AWS::SNS::Notification;
+use Cro::HTTP::BodyParser::JSONClass;
+
+class SNSBodyParser does Cro::HTTP::BodyParser::JSONClass[AWS::SNS::Notification] {
+	use Cro::HTTP::Message;
+    method is-applicable(Cro::HTTP::Message $message --> Bool ) {
+        $message.header('x-amz-sns-message-type').defined && $message.header('x-amz-sns-message-id').defined;
+    }
+}
+
+
+my $app = route {
+    body-parser SNSBodyParser;
+    post -> 'sns-message' {
+        request-body -> $notification {
+            # Check this is a valid notification
+            if $notification.verify-signature {
+               if $notification.is-notification {
+                   # Do something with the $notification.message
+                   # The format of which depends on the source - an S3 notification will be a JSON String for instance
+               }
+               else {
+                   # This is subscribe or unsubscribe confirmation request
+                   # so perform the confirmation
+                   $notification.respond;
+               }
+            }
+            else {
+                bad-request 'text/plain', 'Fake notification';
+            }
+        }
+    }
+};
+
+my Cro::Service $service = Cro::HTTP::Server.new(:host<127.0.0.1>, :port<7798>, application => $app);
+
+$service.start;
+
+react  { whenever signal(SIGINT) { $service.stop; exit; } }
+```
+
 ## Description
 
 This class describes an [AWS Simple Notification Service](https://aws.amazon.com/sns/) message that may be delivered by HTTPS or by a message queue or somesuch.
